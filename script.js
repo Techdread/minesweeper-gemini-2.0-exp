@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (square.classList.contains('revealed') || square.classList.contains('flagged')) return;
         if (board[row][col] === 'mine') {
             revealMines();
+            square.textContent = '💣';
             square.classList.add('mine');
             message.textContent = 'Game Over!';
             gameOver = true;
@@ -146,9 +147,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (square.classList.contains('revealed')) return;
         if (square.classList.contains('flagged')) {
             square.classList.remove('flagged');
+            square.textContent = '';
             flagsPlaced--;
         } else {
             square.classList.add('flagged');
+            square.textContent = '🚩';
             flagsPlaced++;
         }
         updateMineCounter();
@@ -176,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
             row.forEach((cell, colIndex) => {
                 if (cell === 'mine') {
                     const square = grid.querySelector(`[data-row="${rowIndex}"][data-col="${colIndex}"]`);
+                    square.textContent = '💣';
                     square.classList.add('mine');
                 }
             });
